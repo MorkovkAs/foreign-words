@@ -1,0 +1,6 @@
+#root
+/.gradle/
+/.idea/
+/build/
+/logs/
+/tmpnodejsnpm-cache/

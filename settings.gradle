@@ -1,0 +1,3 @@
+rootProject.name = 'foreign-words'
+include 'words-service'
+include 'words-service-ui'
