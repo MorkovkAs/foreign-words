@@ -50,3 +50,30 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+// clean service and ui files
+task allClean(type: Delete) {
+    final def dirService = "${rootDir}/words-service"
+    final def dirUI = "${rootDir}/words-service-ui"
+    delete "${dirUI}/build"
+    //delete "${dirUI}/node"
+    //delete "${dirUI}/node_modules"
+    delete "${dirUI}/dist"
+    delete "${dirUI}/coverage"
+    delete "${dirService}/src/main/resources/static"
+    delete "${dirService}/build"
+}
+
+task stage(dependsOn: ['build', 'clean', 'allClean', 'copyAllToLib'])
+allClean.mustRunAfter(clean)
+build.mustRunAfter(allClean)
+
+task copyAllToLib(type: Copy) {
+    //Build words-service-ui first
+    dependsOn(':words-service-ui:buildForBootRun')
+    into "$buildDir/libs"
+    from(configurations.compile)
+}
+
+bootJar.dependsOn(copyAllToLib)
+bootJar.mustRunAfter(copyAllToLib)

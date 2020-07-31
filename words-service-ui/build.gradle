@@ -1,14 +1,34 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
+    }
+}
+
 plugins {
-    id 'java'
+    id("org.siouan.frontend") version "3.0.0"
+    id("java")
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+version '0.0.1'
 
-repositories {
-    mavenCentral()
+java {
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+frontend {
+    nodeVersion.set("10.16.0")
+    cleanScript.set("run clean")
+    installScript.set("install")
+    assembleScript.set("run build")
 }
+
+task copyJsFilesToService(type: Copy) {
+    //dependsOn("assembleFrontend")
+    from("$buildDir/dist")
+    into("$rootDir/words-service/build/resources/main/static")
+}
+
+task buildForBootRun(dependsOn: ['copyJsFilesToService'])

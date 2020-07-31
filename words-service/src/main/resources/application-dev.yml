@@ -1,0 +1,6 @@
+# Database Properties
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5757/
+    username: postgres
+    password: postgres
