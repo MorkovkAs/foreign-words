@@ -12,6 +12,7 @@ plugins {
     id("java")
 }
 
+group = "com.morkovka.foreign-words"
 version '0.0.1'
 
 java {
@@ -26,7 +27,7 @@ frontend {
 }
 
 task copyJsFilesToService(type: Copy) {
-    //dependsOn("assembleFrontend")
+    dependsOn("assembleFrontend")
     from("$buildDir/dist")
     into("$rootDir/words-service/build/resources/main/static")
 }
