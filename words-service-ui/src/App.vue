@@ -1,17 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Words check</h1>
+    <hr>
+    <WordsLayout
+        v-bind:words="words"/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import WordsLayout from '@/components/WordsLayout.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      words: [
+        {id: 1, name: 'arbeiten', translation: 'work', partOfSpeech: 'Verb', gender: null},
+        {id: 2, name: 'lernen', translation: 'learn', partOfSpeech: 'Verb', gender: null},
+        {id: 3, name: 'Mutter', translation: 'Mother', partOfSpeech: 'Noun', gender: 'FEMININE'},
+        {id: 4, name: 'Vater', translation: 'Father', partOfSpeech: 'Noun', gender: 'MASCULINE'}
+      ]
+    }
+  },
   components: {
-    HelloWorld
+    WordsLayout, Footer
   }
 }
 </script>

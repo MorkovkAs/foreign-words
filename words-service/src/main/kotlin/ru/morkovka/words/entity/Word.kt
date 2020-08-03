@@ -11,5 +11,14 @@ data class Word(
     val id: Long = 0,
 
     @Column
-    val name: String
+    val name: String,
+
+    @Column
+    val translation: String,
+
+    @Column(name = "part_of_speech")
+    val partOfSpeech: PartOfSpeech,
+
+    @Column
+    val gender: Gender
 )
