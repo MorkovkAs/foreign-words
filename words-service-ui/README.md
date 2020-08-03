@@ -1,11 +1,14 @@
-# words-service-ui
+# Jira report tool service UI
 
-## Project setup
+It is a Vue.js client for memorizing and checking words.
+
+## Installation
 ```
+cd foreign-words/words-service-ui/
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development purpose
 ```
 npm run serve
 ```
@@ -22,3 +25,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Thanks!
+Any questions or problems give me a shout on email avklimakov@gmail.com
+
+## License
+Copyright 2020 Anton Klimakov\
+Licensed under the Apache License, Version 2.0

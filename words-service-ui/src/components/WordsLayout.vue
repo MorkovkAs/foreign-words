@@ -1,6 +1,7 @@
 <template>
   <div class="WordsLayout">
-    <ul>
+    <ul :style="gridStyle"
+        class="card-list">
       <WordItem
           v-for="word of words"
           v-bind:word="word"
@@ -18,6 +19,18 @@ export default {
   props: [
     'words'
   ],
+  data() {
+    return {
+      numberOfColumns: 3
+    }
+  },
+  computed: {
+    gridStyle() {
+      return {
+        gridTemplateColumns: `repeat(${this.numberOfColumns}, minmax(100px, 1fr))`
+      }
+    },
+  },
   components: {
     WordItem
   }
@@ -29,5 +42,10 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.card-list {
+  display: grid;
+  grid-gap: 1em;
 }
 </style>
