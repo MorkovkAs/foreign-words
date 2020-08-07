@@ -21,7 +21,7 @@ export default {
   ],
   data() {
     return {
-      numberOfColumns: 3
+      numberOfColumns: 4
     }
   },
   computed: {

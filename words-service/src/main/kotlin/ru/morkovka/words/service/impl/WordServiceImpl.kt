@@ -26,5 +26,8 @@ class WordServiceImpl : WordService {
     override fun delete(id: Long) =
         wordRepository.deleteById(id)
 
+    override fun getRandomN(n: Int): MutableList<Word> =
+        wordRepository.getRandomN(n)
+
 
 }

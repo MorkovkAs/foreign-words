@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <h1>Words check</h1>
-    <hr>
     <WordsLayout
         v-bind:words="words"/>
     <Footer/>
@@ -16,13 +15,16 @@ export default {
   name: 'App',
   data() {
     return {
-      words: [
-        {id: 1, name: 'arbeiten', translation: 'work', partOfSpeech: 'Verb', gender: null},
-        {id: 2, name: 'lernen', translation: 'learn', partOfSpeech: 'Verb', gender: null},
-        {id: 3, name: 'Mutter', translation: 'Mother', partOfSpeech: 'Noun', gender: 'FEMININE'},
-        {id: 4, name: 'Vater', translation: 'Father', partOfSpeech: 'Noun', gender: 'MASCULINE'}
-      ]
+      words: []
     }
+  },
+  mounted() {
+    fetch("/api/word/random/5")
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        this.words = json
+      })
   },
   components: {
     WordsLayout, Footer

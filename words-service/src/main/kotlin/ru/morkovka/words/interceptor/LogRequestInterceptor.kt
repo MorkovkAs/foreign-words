@@ -15,8 +15,9 @@ class LogRequestInterceptor : HandlerInterceptorAdapter() {
 
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        logger.info("[REQUEST] [${request.method}] ${request.requestURI} [${getParams(request)}]")
-
+        if (request.requestURI.startsWith("/api")) {
+            logger.info("[REQUEST] [${request.method}] ${request.requestURI} [${getParams(request)}]")
+        }
         return true
     }
 

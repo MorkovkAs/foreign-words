@@ -17,8 +17,10 @@ data class Word(
     val translation: String,
 
     @Column(name = "part_of_speech")
+    @Enumerated(EnumType.STRING)
     val partOfSpeech: PartOfSpeech,
 
     @Column
+    @Enumerated(EnumType.STRING)
     val gender: Gender
 )

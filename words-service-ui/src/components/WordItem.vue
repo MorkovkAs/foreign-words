@@ -1,9 +1,9 @@
 <template>
   <li v-bind:class="getClass()" v-on:click="wordChecked = true">
     <span> {{ word.translation }} </span>
-    <p><b v-if="wordChecked"> {{ word.name }} </b></p>
+    <p><b v-show="wordChecked"> {{ word.name }} </b></p>
     <button class="helpButton" v-if="!wordChecked">&#63;</button>
-    <section v-if="wordChecked">
+    <section v-show="wordChecked">
       <button class="correctButton" v-on:click="clickCorrect">Correct</button>
       <button class="mistakeButton" v-on:click="clickMistake">Mistake</button>
     </section>
@@ -54,28 +54,29 @@ li {
   justify-content: space-between;
   padding: .5rem 2rem;
   font-size: 25px;
+  height: 9rem;
 }
 
 .correct {
-  background: #a0ff98;
-  color: #000;
+  background: #7bb526;
+  color: #fff;
 }
 
 .mistake {
-  background: #ffb8b8;
-  color: #000;
+  background: #ef8575;
+  color: #fff;
 }
 
 .helpButton {
-  background: yellow;
-  color: #000;
+  background: #390701;
+  color: #fff;
   border-radius: 30%;
   font-weight: bold;
   font-size: 20px;
 }
 
 .correctButton {
-  background: yellowgreen;
+  background: #347403;
   color: #fff;
   border-radius: 10%;
   font-weight: bold;
@@ -84,7 +85,7 @@ li {
 }
 
 .mistakeButton {
-  background: indianred;
+  background: #f32c22;
   color: #fff;
   border-radius: 10%;
   font-weight: bold;

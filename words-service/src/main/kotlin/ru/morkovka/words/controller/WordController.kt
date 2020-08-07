@@ -7,6 +7,7 @@ import ru.morkovka.words.entity.Word
 import ru.morkovka.words.service.WordService
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/word")
 class WordController {
 
@@ -29,4 +30,7 @@ class WordController {
 
     @DeleteMapping("{id}")
     fun delete(@PathVariable id: Long) = wordService.delete(id)
+
+    @GetMapping("random/{n}")
+    fun getRandomN(@PathVariable n: Int) = wordService.getRandomN(n)
 }
