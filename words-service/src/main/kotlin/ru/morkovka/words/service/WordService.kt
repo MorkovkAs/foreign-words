@@ -14,4 +14,6 @@ interface WordService {
     fun delete(id: Long)
 
     fun getRandomN (n: Int): MutableList<Word>
+
+    fun updateCheckResult (id: Long, n: Int): Word
 }

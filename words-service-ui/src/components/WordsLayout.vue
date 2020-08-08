@@ -6,6 +6,8 @@
           v-for="word of words"
           v-bind:word="word"
           :key="word.id"
+          v-on:update-check-result = "updateCheckResult"
+          v-on:edit-word = "editWord"
       />
     </ul>
   </div>
@@ -30,6 +32,14 @@ export default {
         gridTemplateColumns: `repeat(${this.numberOfColumns}, minmax(100px, 1fr))`
       }
     },
+  },
+  methods: {
+    updateCheckResult (id, n) {
+      this.$emit ('update-check-result', id, n)
+    },
+    editWord (id) {
+      this.$emit ('edit-word', id)
+    }
   },
   components: {
     WordItem

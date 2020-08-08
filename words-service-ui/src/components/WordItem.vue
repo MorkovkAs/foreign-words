@@ -1,11 +1,18 @@
 <template>
   <li v-bind:class="getClass()" v-on:click="wordChecked = true">
-    <span> {{ word.translation }} </span>
+    <section class="line">
+      <span class="wordName"> {{ word.translation }} </span>
+      <button class="editButton" v-on:click.stop="clickEdit">
+        <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+      </button>
+    </section>
     <p><b v-show="wordChecked"> {{ word.name }} </b></p>
-    <button class="helpButton" v-if="!wordChecked">&#63;</button>
+    <button class="helpButton" v-if="!wordChecked" v-on:click.stop="clickHelp">
+      <font-awesome-icon icon="question"/>
+    </button>
     <section v-show="wordChecked">
-      <button class="correctButton" v-on:click="clickCorrect">Correct</button>
-      <button class="mistakeButton" v-on:click="clickMistake">Mistake</button>
+      <button class="correctButton" v-on:click.stop="clickCorrect">Correct</button>
+      <button class="mistakeButton" v-on:click.stop="clickMistake">Mistake</button>
     </section>
   </li>
 </template>
@@ -30,13 +37,23 @@ export default {
     checkTheWord() {
       this.wordChecked = true
     },
+    clickHelp() {
+      console.log('help')
+    },
+    clickEdit() {
+      this.$emit('edit-word', this.word.id)
+    },
     clickCorrect() {
-      this.wordCorrect = true
-      this.wordMistake = false
+      let self = this
+      self.wordCorrect = true
+      self.wordMistake = false
+      self.$emit('update-check-result', self.word.id, 1)
     },
     clickMistake() {
-      this.wordCorrect = false
-      this.wordMistake = true
+      let self = this
+      self.wordCorrect = false
+      self.wordMistake = true
+      self.$emit('update-check-result', self.word.id, -1)
     },
     getClass() {
       return {
@@ -50,11 +67,17 @@ export default {
 
 <style scoped>
 li {
-  border: 1px solid #3769a7;
-  justify-content: space-between;
+  border: 1.5px solid #390701;
+  border-radius: 5%;
   padding: .5rem 2rem;
   font-size: 25px;
   height: 9rem;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 10%;
+  font-weight: bold;
 }
 
 .correct {
@@ -68,28 +91,41 @@ li {
 }
 
 .helpButton {
-  background: #390701;
-  color: #fff;
-  border-radius: 30%;
-  font-weight: bold;
   font-size: 20px;
+}
+
+.editButton {
+  font-size: 20px;
+  flex: 0 1 auto;
+  margin-left: auto;
 }
 
 .correctButton {
   background: #347403;
   color: #fff;
-  border-radius: 10%;
-  font-weight: bold;
   font-size: 15px;
   margin-right: 1rem;
+  width: 6rem
 }
 
 .mistakeButton {
   background: #f32c22;
   color: #fff;
-  border-radius: 10%;
-  font-weight: bold;
   font-size: 15px;
   margin-left: 1rem;
+  width: 6rem;
+}
+
+.line {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.wordName {
+  flex: 0 1 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

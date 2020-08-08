@@ -33,4 +33,7 @@ class WordController {
 
     @GetMapping("random/{n}")
     fun getRandomN(@PathVariable n: Int) = wordService.getRandomN(n)
+
+    @PostMapping("check/{id}/result/{n}")
+    fun updateCheckResult(@PathVariable id: Long, @PathVariable n: Int) = wordService.updateCheckResult(id, n)
 }

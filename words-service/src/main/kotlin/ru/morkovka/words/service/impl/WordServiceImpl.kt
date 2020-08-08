@@ -29,5 +29,10 @@ class WordServiceImpl : WordService {
     override fun getRandomN(n: Int): MutableList<Word> =
         wordRepository.getRandomN(n)
 
-
+    override fun updateCheckResult(id: Long, n: Int): Word {
+        val word = get(id)
+        word.counter += n
+        wordRepository.save(word)
+        return word
+    }
 }

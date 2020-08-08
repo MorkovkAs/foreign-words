@@ -11,16 +11,19 @@ data class Word(
     val id: Long = 0,
 
     @Column
-    val name: String,
+    var name: String,
 
     @Column
-    val translation: String,
+    var translation: String,
 
     @Column(name = "part_of_speech")
     @Enumerated(EnumType.STRING)
-    val partOfSpeech: PartOfSpeech,
+    var partOfSpeech: PartOfSpeech,
 
     @Column
     @Enumerated(EnumType.STRING)
-    val gender: Gender
+    var gender: Gender?,
+
+    @Column
+    var counter: Int = 0
 )
