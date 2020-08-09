@@ -7,13 +7,10 @@
         v-bind:words="words"
         style="height: 70vh"
     />
-    <modal name="my-first-modal"
-           :adaptive="true"
-           :draggable="true"
-           :resizable="true">
+    <modal name="modal-word-edit" transition="pop-out" :width="modalWidth" :focus-trap="true" :height="320">
       <WordEdit v-bind:initialWord="words[getIndex(idForEdit)]"
                 v-on:edit-word-save="editWordSave"
-      />
+                v-on:edit-word-cancel="hideModalEdit"/>
     </modal>
     <Footer/>
   </div>
@@ -25,6 +22,8 @@ import WordEdit from '@/components/WordEdit.vue'
 import Footer from '@/components/Footer.vue'
 import axios from 'axios'
 
+const MODAL_WIDTH = 656
+
 export default {
   name: 'App',
   components: {
@@ -34,8 +33,13 @@ export default {
     return {
       words: [],
       idForEdit: 0,
-      url: ""// "http://localhost:8080/"
+      url: "http://localhost:8080/",
+      modalWidth: MODAL_WIDTH
     }
+  },
+  created() {
+    this.modalWidth =
+        window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH
   },
   mounted() {
     this.getWordList()
@@ -60,18 +64,19 @@ export default {
           .put(this.url + `/api/word/${word.id}`, word)
           .then(response => {
             self.$set(self.words, this.getIndex(response.data.id), response.data)
+            self.hideModalEdit()
           })
           .catch(error => console.log(error));
     },
     editWord(id) {
       this.idForEdit = id
-      this.show()
+      this.showModalEdit()
     },
-    show() {
-      this.$modal.show('my-first-modal');
+    showModalEdit() {
+      this.$modal.show('modal-word-edit');
     },
-    hide() {
-      this.$modal.hide('my-first-modal');
+    hideModalEdit() {
+      this.$modal.hide('modal-word-edit');
     },
     getIndex(id) {
       return this.words.findIndex(word => word.id === id)

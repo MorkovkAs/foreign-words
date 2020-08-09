@@ -68,7 +68,7 @@ export default {
 <style scoped>
 li {
   border: 1.5px solid #390701;
-  border-radius: 5%;
+  border-radius: 10px;
   padding: .5rem 2rem;
   font-size: 25px;
   height: 9rem;
@@ -76,7 +76,7 @@ li {
 
 button {
   cursor: pointer;
-  border-radius: 10%;
+  border-radius: 4px;
   font-weight: bold;
 }
 
@@ -120,6 +120,7 @@ button {
   display: flex;
   justify-content: flex-start;
   position: relative;
+  background: url('/src/assets/words.jpeg');
 }
 
 .wordName {
