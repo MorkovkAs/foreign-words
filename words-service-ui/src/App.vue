@@ -33,7 +33,7 @@ export default {
     return {
       words: [],
       idForEdit: 0,
-      url: "http://localhost:8080/",
+      url: "",//http://localhost:8080/",
       modalWidth: MODAL_WIDTH
     }
   },
